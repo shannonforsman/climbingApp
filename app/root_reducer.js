@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import AreasReducer from '../data/areas/reducer_areas';
+import AreasReducer from './data/areas/reducer_areas';
 
 
 const rootReducer = combineReducers({
