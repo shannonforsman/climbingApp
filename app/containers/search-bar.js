@@ -10,9 +10,12 @@ export default class SearchBar extends Component {
   onInputChange(e) {
     this.setState({term: e.target.value})
   }
+  onFormSubmit(e) {
+    e.preventDefault;
+  }
   render() {
     return (
-      <form className="input-group">
+      <form onSubmt={this.onFormSubmit} className="input-group">
         <input
          placeholder="Search Climbing Areas"
          className="form-control"
