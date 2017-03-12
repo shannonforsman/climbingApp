@@ -6,23 +6,38 @@ import { Link } from 'react-router';
 
 
 class AreaList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.renderAreaList = this.renderAreaList.bind(this);
+  }
   componentWillMount() {
-    console.log(this.props.fetchAreaList())
+    this.props.fetchAreaList();
+  }
+  renderAreaList() {
+    console.log('arealist', this.props.areaList)
+    return this.props.areaList.map((area) =>  {
+      return <li key={area._id} >{area.properties.name}</li>
+    });
   }
   render() {
     return (
       <div>
         <Link to="/areas/new" className="button button-primary">Add area</Link>
         <ul className="list-group col-sm-4">
-          <div>Area List</div>
+          <ul>{this.renderAreaList()}</ul>
         </ul>
       </div>
     )
   }
 }
 
+function mapStateToProps(state) {
+  return { areaList : state.areaList.all }
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchAreaList }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(AreaList);
+export default connect(mapStateToProps, mapDispatchToProps)(AreaList);
