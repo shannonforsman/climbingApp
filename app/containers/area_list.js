@@ -1,42 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectArea } from '../actions/index';
 import { bindActionCreators } from 'redux';
+import { fetchAreaList } from '../data/area-list/action_fetchAreaList';
 import { Link } from 'react-router';
 
-class AreaList extends Component {
-  renderList() {
-    return this.props.areaList.map((area) => {
-      return (
-        <li key={area.areaName}
-            onClick={() => this.props.selectArea(area)}
-            className="list-group-item">
-            <Link to={"areas/" + area.id}>
 
-            {area.areaName}
-            </Link>
-        </li>
-      );
-    });
+class AreaList extends Component {
+  componentWillMount() {
+    console.log(this.props.fetchAreaList())
   }
   render() {
     return (
-      <ul className="list-group col-sm-4">
-        {this.renderList()}
-      </ul>
+      <div>
+        <Link to="/areas/new" className="button button-primary">Add area</Link>
+        <ul className="list-group col-sm-4">
+          <div>Area List</div>
+        </ul>
+      </div>
     )
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    areaList: state.areaList
-  }
-}
-//ANything returned from this function will end up as props on the area list container
-function mapDispatchToProps(dispatch){
-  //whenever selectArea is called, the result should be passed to all of our reducers
-  return bindActionCreators({ selectArea : selectArea }, dispatch);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchAreaList }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AreaList);
+export default connect(null, mapDispatchToProps)(AreaList);

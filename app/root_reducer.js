@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import AreasListReducer from './data/areas/reducer_areaList';
-import ActiveArea from './data/active-area/reducer_activeArea';
+import AreaListReducer from './data/area-list/reducer_areaList';
+import ActiveArea from './data/area-active/reducer_areaActive';
 
 
 const rootReducer = combineReducers({
-  areaList: AreasListReducer,
+  areaList: AreaListReducer,
   areaActive: ActiveArea
 });
 
