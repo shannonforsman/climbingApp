@@ -17,13 +17,18 @@ class AreaList extends Component {
   renderAreaList() {
     console.log('arealist', this.props.areaList)
     return this.props.areaList.map((area) =>  {
-      return <li key={area._id} >{area.properties.name}</li>
+      return (
+        <li key={area._id} >
+          <Link to={"/areas/" + area._id}  >
+            {area.properties.name}
+          </Link>
+        </li>
+      )
     });
   }
   render() {
     return (
       <div>
-        <Link to="/areas/new" className="button button-primary">Add area</Link>
         <ul className="list-group col-sm-4">
           <ul>{this.renderAreaList()}</ul>
         </ul>

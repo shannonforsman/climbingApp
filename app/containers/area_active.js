@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchActiveArea } from '../data/area-active/action_fetchAreaActive';
+import { bindActionCreators } from 'redux';
+
 
 class AreaActive extends Component {
+  componentWillMount() {
+    this.props.fetchActiveArea(this.props.params.id);
+  }
+
   render() {
-    if (!this.props.area) {
-      return <div>Select a book</div>
-    }
-    return(
-      <div>
-        <h3>Detail for:</h3>
-        <div>{this.props.area.areaName}</div>
-        <div>{this.props.params.id}</div>
-      </div>
+    console.log('props', this.props)
+    return (
+      <div></div>
     )
   }
 }
 
 function mapStateToProps(state) {
+  console.log('stateactive', state)
   return {
     areaActive : state.activeArea
   }
 }
 
-export default connect(mapStateToProps)(AreaActive);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchActiveArea }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AreaActive);
